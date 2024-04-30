@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm'
 import { join } from 'path'
 import dotenv from 'dotenv'
+import environment from '../environment/environment'
 
 dotenv.config()
 
@@ -10,11 +11,11 @@ let AppDataSource: DataSource
 
 export const dataSource = new DataSource({
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: environment.DB_HOST,
+  port: Number(environment.DB_PORT),
+  username: environment.DB_USERNAME,
+  password: environment.DB_PASSWORD,
+  database: environment.DB_NAME,
   synchronize: false,
   logging: false,
   ssl: false,

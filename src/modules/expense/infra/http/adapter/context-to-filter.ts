@@ -1,16 +1,17 @@
 import { Context } from 'vm'
-import { ExpenseFilter } from '../../../domain/expense-filter'
+import { ExpenseFilter, ExpenseFilterDTO } from '../../../domain/expense-filter'
 
 export class ContextToFilter extends ExpenseFilter {
   private constructor(ctx: Context) {
     const { global, params } = ctx
-    super({
-      id: params.id,
-      userId: global.user.id
-    })
+    let data: ExpenseFilterDTO = { userId: global.user.id }
+    if (params?.id) {
+      data = { ...data, id: params.id }
+    }
+    super(data)
   }
 
-  static of(ctx: Context): ContextToFilter {
+  static of(ctx: Context): ExpenseFilter {
     return new ContextToFilter(ctx)
   }
 }

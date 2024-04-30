@@ -31,8 +31,12 @@ export class ExpenseServiceImpl implements ExpenseService {
     }
   }
 
-  getExpense(filter: ExpenseFilter): Promise<Expense> {
-    return this.expenseRepository.getOne(filter)
+  async getExpense(filter: ExpenseFilter): Promise<Expense> {
+    const result = await this.expenseRepository.getOne(filter)
+    if (!result) {
+      throw new ExpenseNotFound()
+    }
+    return result
   }
 
   getListExpense(filter: ExpenseFilter): Promise<Expense[]> {

@@ -33,6 +33,6 @@ export class Expense implements Jsonable {
   }
 
   toJson() {
-    return { ...this.params }
+    return { ...this.params, user: this.user?.toJson() }
   }
 }

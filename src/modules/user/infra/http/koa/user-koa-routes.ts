@@ -1,11 +1,10 @@
 import Router from '@koa/router'
-import { DefaultState, DefaultContext, Context } from 'koa'
+import { Context } from 'koa'
 import { KoaRoutesBuilder } from '../../../../../server/koa/koa-routes-builder'
 import { ContextToUserRegister } from './adapter/context-to-user-register'
 import { getUserService } from '../../bootstrap/user-bootstrap-helpers'
 import { UserService } from '../../../domain/user-service'
 import { ContextToAuth } from './adapter/context-to-user-auth'
-import { UserJWT } from '../../../domain/user-jwt'
 
 export class UserKoaRoutes extends KoaRoutesBuilder {
   private userService: UserService = getUserService()

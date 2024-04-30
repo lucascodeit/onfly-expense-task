@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing data-source from db should have the correct configurations 1`] = `
+{
+  "database": "onfly_db",
+  "entities": [
+    "/Users/bagyadmin/Projects/onfly/src/**/*-entity.{js,ts}",
+  ],
+  "host": "localhost",
+  "logging": false,
+  "migrations": [
+    "/Users/bagyadmin/Projects/onfly/src/common/db/migrations/*.{js,ts}",
+  ],
+  "password": "mysql-onfly",
+  "port": 3306,
+  "ssl": false,
+  "synchronize": false,
+  "type": "mysql",
+  "username": "root",
+}
+`;

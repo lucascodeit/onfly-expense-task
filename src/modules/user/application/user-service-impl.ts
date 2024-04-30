@@ -9,6 +9,7 @@ import { UserRegister } from '../domain/user-register'
 import { User } from '../domain/user'
 import { UserAuth } from '../domain/user-auth'
 import { UserJWT } from '../domain/user-jwt'
+import environment from '../../../common/environment/environment'
 
 @injectable()
 export class UserServiceImpl implements UserService {
@@ -45,7 +46,7 @@ export class UserServiceImpl implements UserService {
         id: user.id,
         email: user.email
       },
-      process.env.JWT_KEY,
+      environment.JWT_KEY,
       {
         expiresIn: '7d'
       }

@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-import Koa, { Context } from 'koa'
+import Koa from 'koa'
 import { createServer } from 'http'
 import Router from '@koa/router'
 import cors from '@koa/cors'
@@ -10,8 +9,7 @@ import { userBootstrap } from '../../modules/user/infra/bootstrap/user-bootstrap
 import { userMiddlewareKoa } from '../../modules/user/infra/http/koa/middleware/user-koa-middleware'
 import { ExpenseKoaRoutes } from '../../modules/expense/infra/http/expense-koa-routes'
 import { expenseBootstrap } from '../../modules/expense/infra/bootstraps/expense-bootstrap'
-
-dotenv.config()
+import environment from '../../common/environment/environment'
 
 bootstrap()
 
@@ -20,17 +18,11 @@ app.use(cors())
 const router = new Router()
 const protectedRoutes = new Router()
 
-app
-  .use(bodyParser())
-  .use(router.routes())
-  .use(protectedRoutes.routes())
-  .on('error', (err, ctx) => {
-    console.error('server error', err, ctx)
-  })
+app.use(bodyParser()).use(router.routes()).use(protectedRoutes.routes())
 
 buildRoutes()
 
-createServer(app.callback()).listen(process.env.PORT).on('listening', listeningEvent)
+createServer(app.callback()).listen(environment.PORT).on('listening', listeningEvent)
 
 function buildRoutes() {
   protectedRoutes.use((ctx, next) => userMiddlewareKoa(ctx, next))
@@ -46,10 +38,12 @@ function buildRoutes() {
 }
 
 function listeningEvent() {
-  console.log(`server up and running in http://localhost:${process.env.PORT}`)
+  console.log(`server up and running in http://localhost:${environment.PORT}`)
 }
 
 function bootstrap() {
   userBootstrap()
   expenseBootstrap()
 }
+
+export { app }

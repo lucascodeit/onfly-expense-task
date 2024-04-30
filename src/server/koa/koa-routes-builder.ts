@@ -1,6 +1,5 @@
 import Router from '@koa/router'
 import { CommonError } from '../../common/exceptions/common-error'
-import { Context } from 'koa'
 
 export abstract class KoaRoutesBuilder {
   constructor(protected router: Router) {
