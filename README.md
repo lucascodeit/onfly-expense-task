@@ -26,6 +26,8 @@ $ docker compose up -d
 $ yarn
 ```
 
+### Criar o arquivo .env e copie o conteudo do env.example para o .env
+
 ### Execute as migrartions para criar as tabelas no banco de dados
 
 ```sh
